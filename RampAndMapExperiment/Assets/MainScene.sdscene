@@ -12,7 +12,37 @@ Hierarchy:
         - ref!! f5cb84ee-3557-463c-803e-64165dc09b9a
         - ref!! 7fb866ef-a18e-41d6-aca4-b94f7d26e5bf
         - ref!! f6116aea-a899-41b5-a428-a8aab2baef21
+        - ref!! 277051be-69bb-4c9c-b202-0d9328e895c5
+        - ref!! 53836a00-0c55-4cf8-ab14-a1e27d577012
+        - ref!! e25b913e-b367-48ec-942b-42d2c708224f
+        - ref!! 70809faf-7296-4833-a96c-2986bce02fa3
+        - ref!! e2b805ad-f1f3-49d4-8e0d-ef01ae153df5
+        - ref!! a7aded27-127c-4049-848c-80249f1ec899
+        - ref!! ecbf705b-32c7-4eff-879f-80e3d875a665
+        - ref!! 7fc9887c-0140-47d4-9b74-84353eeea96b
+        - ref!! af540db8-6bc4-4377-87c0-27443d3d168b
     Parts:
+        -   Entity:
+                Id: 277051be-69bb-4c9c-b202-0d9328e895c5
+                Name: RampProcessor
+                Components:
+                    32f329dcc69b1bd2bf8a33d3a7ce077a: !TransformComponent
+                        Id: f39cf4e3-984c-47dd-9b99-6df03f363a0a
+                        Position: {X: 0.0, Y: 0.0, Z: 0.0}
+                        Rotation: {X: 0.0, Y: 0.0, Z: 0.0, W: 1.0}
+                        Scale: {X: 1.0, Y: 1.0, Z: 1.0}
+                        Children: {}
+                    16d333f84cc32231b25ecf7060d7eda2: !RampAndMapExperiment.RampProcessor,RampAndMapExperiment
+                        Id: 7e245bb9-13f3-4330-8ec6-0dbf25e8863f
+                        player: ref!! 7fb866ef-a18e-41d6-aca4-b94f7d26e5bf
+                        point1: ref!! 53836a00-0c55-4cf8-ab14-a1e27d577012
+                        point2: ref!! e25b913e-b367-48ec-942b-42d2c708224f
+                        point3: ref!! 70809faf-7296-4833-a96c-2986bce02fa3
+                        point4: ref!! e2b805ad-f1f3-49d4-8e0d-ef01ae153df5
+                        point5: ref!! a7aded27-127c-4049-848c-80249f1ec899
+                        point6: ref!! ecbf705b-32c7-4eff-879f-80e3d875a665
+                        point7: ref!! 7fc9887c-0140-47d4-9b74-84353eeea96b
+                        l_Points: {}
         -   Entity:
                 Id: 3ff2745b-7a47-4e41-8088-1c0e33af906b
                 Name: Camera
@@ -28,6 +58,33 @@ Hierarchy:
                         Name: null
                         Projection: Perspective
                         Slot: f6ebd928-f3c9-4904-bf5a-e79ffbcc133c
+                    60ff86503d3a0e6fb02bc8fa443bc319: !RampAndMapExperiment.BasicCameraController,RampAndMapExperiment
+                        Id: 49d84370-529f-4cf1-8775-a3096c9ec95d
+                        Gamepad: false
+                        KeyboardMovementSpeed: {X: 5.0, Y: 5.0, Z: 5.0}
+                        TouchMovementSpeed: {X: 0.7, Y: 0.7, Z: 0.3}
+                        SpeedFactor: 5.0
+                        KeyboardRotationSpeed: {X: 3.0, Y: 3.0}
+                        MouseRotationSpeed: {X: 1.0, Y: 1.0}
+                        TouchRotationSpeed: {X: 1.0, Y: 0.7}
+        -   Entity:
+                Id: 53836a00-0c55-4cf8-ab14-a1e27d577012
+                Name: Point1
+                Components:
+                    ea1ac9f254eaa7914bcce95fba3d3399: !TransformComponent
+                        Id: 9aedaa7a-38a4-452c-9791-2df4aed4367a
+                        Position: {X: 0.0, Y: 0.0, Z: 3.106014}
+                        Rotation: {X: 0.0, Y: 0.0, Z: 0.0, W: 1.0}
+                        Scale: {X: 1.0, Y: 1.0, Z: 1.0}
+                        Children: {}
+                    7edc8fea270f1df83c934eac14477654: !ModelComponent
+                        Id: 82016097-a37c-49c3-9b22-275983a361b6
+                        Model: 3100d734-d882-4aea-9813-0a9fd67bd92f:Sphere
+                        Materials:
+                            7757d73b859fb6feca80df71ef2c72e3~0: f71657a0-07f1-4b18-a1bb-2969264c8f68:Sphere Material 3
+                    41c65e3fa57371acd303b07f9b05bc7d: !InstancingComponent
+                        Id: f363fcab-962d-42fa-a338-de621e7289a8
+                        Type: !InstancingEntityTransform {}
         -   Entity:
                 Id: 5fc289f4-fa2c-4802-8b72-8f4127e65bb9
                 Name: Skybox
@@ -46,6 +103,24 @@ Hierarchy:
                         Type: !LightSkybox
                             Skybox: 5af268d8-69a5-46a3-8b38-a6b44b9de8ff:Skybox
         -   Entity:
+                Id: 70809faf-7296-4833-a96c-2986bce02fa3
+                Name: Point3
+                Components:
+                    ea1ac9f254eaa7914bcce95fba3d3399: !TransformComponent
+                        Id: 90917c92-72cd-4964-948a-124ddcc113fd
+                        Position: {X: 0.0, Y: 3.0, Z: -2.7401416}
+                        Rotation: {X: 0.0, Y: 0.0, Z: 0.0, W: 1.0}
+                        Scale: {X: 1.0, Y: 1.0, Z: 1.0}
+                        Children: {}
+                    7edc8fea270f1df83c934eac14477654: !ModelComponent
+                        Id: c8edeeec-1ecd-4ae2-9f73-db708c05bece
+                        Model: 3100d734-d882-4aea-9813-0a9fd67bd92f:Sphere
+                        Materials:
+                            44c5ab87fe8217ba98a5656f74cd2813~0: 6d963115-109c-46d2-8f09-7d200b14d9c1:Sphere Material 2
+                    41c65e3fa57371acd303b07f9b05bc7d: !InstancingComponent
+                        Id: 2f483845-0bfd-406c-870a-7f233af3f7c6
+                        Type: !InstancingEntityTransform {}
+        -   Entity:
                 Id: 7fb866ef-a18e-41d6-aca4-b94f7d26e5bf
                 Name: Sphere
                 Components:
@@ -58,6 +133,56 @@ Hierarchy:
                     893816e2aa07ecbf7769124ca8ac9a0a: !ModelComponent
                         Id: f1c7e945-dd80-444b-b5ed-83cb10191a54
                         Model: 3100d734-d882-4aea-9813-0a9fd67bd92f:Sphere
+                        Materials: {}
+        -   Entity:
+                Id: 7fc9887c-0140-47d4-9b74-84353eeea96b
+                Name: Point7
+                Components:
+                    ea1ac9f254eaa7914bcce95fba3d3399: !TransformComponent
+                        Id: e69832b3-fe8f-44c6-961d-d4c136e0c412
+                        Position: {X: -5.7272034, Y: 0.09800464, Z: 0.68320847}
+                        Rotation: {X: 0.0, Y: 0.0, Z: 0.0, W: 1.0}
+                        Scale: {X: 1.0, Y: 1.0, Z: 1.0}
+                        Children: {}
+                    7edc8fea270f1df83c934eac14477654: !ModelComponent
+                        Id: 4c3ff0e2-ba42-4dc0-a0f0-48e6a1538e35
+                        Model: 3100d734-d882-4aea-9813-0a9fd67bd92f:Sphere
+                        Materials:
+                            aea4a69984a202e23a04c822f1ef53c8~0: ef51ce78-b485-4233-bd3c-639716e7b407:Glass
+                    41c65e3fa57371acd303b07f9b05bc7d: !InstancingComponent
+                        Id: 2b179283-c429-4708-bed6-de8cab94411d
+                        Type: !InstancingEntityTransform {}
+        -   Entity:
+                Id: a7aded27-127c-4049-848c-80249f1ec899
+                Name: Point5
+                Components:
+                    ea1ac9f254eaa7914bcce95fba3d3399: !TransformComponent
+                        Id: 302ee9b8-138a-4a7d-820f-b1c777ab94dc
+                        Position: {X: -5.4014626, Y: 0.4984107, Z: 0.0}
+                        Rotation: {X: 0.0, Y: 0.0, Z: 0.0, W: 1.0}
+                        Scale: {X: 1.0, Y: 1.0, Z: 1.0}
+                        Children: {}
+                    7edc8fea270f1df83c934eac14477654: !ModelComponent
+                        Id: 000f505a-8030-4f13-b023-6a0a759816cf
+                        Model: 3100d734-d882-4aea-9813-0a9fd67bd92f:Sphere
+                        Materials:
+                            aea4a69984a202e23a04c822f1ef53c8~0: 6aee18bc-aeb1-4fe2-a697-b8e78dcf7ae9:ClearCoat
+                    41c65e3fa57371acd303b07f9b05bc7d: !InstancingComponent
+                        Id: 6e05a702-02c1-4a41-8651-ff4d4f80dd3e
+                        Type: !InstancingEntityTransform {}
+        -   Entity:
+                Id: af540db8-6bc4-4377-87c0-27443d3d168b
+                Name: Ground_2
+                Components:
+                    257dd8f1bd9a2f8b29d98306be27a0b5: !TransformComponent
+                        Id: d8291f71-0064-426b-9597-cbf8d120e61e
+                        Position: {X: -0.3487941, Y: 1.3537586, Z: -0.29323164}
+                        Rotation: {X: 0.23871994, Y: 0.4072905, Z: -0.11118051, W: 0.8745091}
+                        Scale: {X: 1.0, Y: 1.0, Z: 1.0}
+                        Children: {}
+                    58986820caa85a18ed3645eadfa22cdf: !ModelComponent
+                        Id: 5a4c2949-b4a3-4d20-b25f-0c9fb15bde64
+                        Model: 7cf451aa-1be3-4b04-aaf4-681e174e9e17:Ground
                         Materials: {}
         -   Entity:
                 Id: b437980d-ec0f-400b-a9f1-f08ecf1527de
@@ -84,6 +209,60 @@ Hierarchy:
                                 ComputeTransmittance: false
                                 BiasParameters: {}
                         Intensity: 20.0
+        -   Entity:
+                Id: e25b913e-b367-48ec-942b-42d2c708224f
+                Name: Point2
+                Components:
+                    ea1ac9f254eaa7914bcce95fba3d3399: !TransformComponent
+                        Id: 400fe4f5-e543-44a3-a102-229ab47cbbfb
+                        Position: {X: 3.9098434, Y: 0.0, Z: 0.0}
+                        Rotation: {X: 0.0, Y: 0.0, Z: 0.0, W: 1.0}
+                        Scale: {X: 1.0, Y: 1.0, Z: 1.0}
+                        Children: {}
+                    7edc8fea270f1df83c934eac14477654: !ModelComponent
+                        Id: ff388ccd-a224-4cde-a932-e765ecd57015
+                        Model: 3100d734-d882-4aea-9813-0a9fd67bd92f:Sphere
+                        Materials:
+                            2f51871bc27c12c6fa7f634f1f49b1fe~0: f71657a0-07f1-4b18-a1bb-2969264c8f68:Sphere Material 3
+                    41c65e3fa57371acd303b07f9b05bc7d: !InstancingComponent
+                        Id: 67dd2e46-1c01-46e0-89eb-1a346d44b2ef
+                        Type: !InstancingEntityTransform {}
+        -   Entity:
+                Id: e2b805ad-f1f3-49d4-8e0d-ef01ae153df5
+                Name: Point4
+                Components:
+                    ea1ac9f254eaa7914bcce95fba3d3399: !TransformComponent
+                        Id: e0a23aa1-f700-4763-b87a-833341fe5e5f
+                        Position: {X: -3.3460176, Y: 3.0, Z: 0.0}
+                        Rotation: {X: 0.0, Y: 0.0, Z: 0.0, W: 1.0}
+                        Scale: {X: 1.0, Y: 1.0, Z: 1.0}
+                        Children: {}
+                    7edc8fea270f1df83c934eac14477654: !ModelComponent
+                        Id: bc489663-ba82-462c-b7e0-fb2eb1f25cb7
+                        Model: 3100d734-d882-4aea-9813-0a9fd67bd92f:Sphere
+                        Materials:
+                            aea4a69984a202e23a04c822f1ef53c8~0: 6d963115-109c-46d2-8f09-7d200b14d9c1:Sphere Material 2
+                    41c65e3fa57371acd303b07f9b05bc7d: !InstancingComponent
+                        Id: 88da818d-2390-49e2-a65d-e8709699aab2
+                        Type: !InstancingEntityTransform {}
+        -   Entity:
+                Id: ecbf705b-32c7-4eff-879f-80e3d875a665
+                Name: Point6
+                Components:
+                    ea1ac9f254eaa7914bcce95fba3d3399: !TransformComponent
+                        Id: b1a83681-98c1-4f9a-98c1-ccd04bc52396
+                        Position: {X: -5.7272034, Y: 0.09800464, Z: 0.68320847}
+                        Rotation: {X: 0.0, Y: 0.0, Z: 0.0, W: 1.0}
+                        Scale: {X: 1.0, Y: 1.0, Z: 1.0}
+                        Children: {}
+                    7edc8fea270f1df83c934eac14477654: !ModelComponent
+                        Id: 5ff4a8ba-72a9-4095-bce0-4dc9c6a0a214
+                        Model: 3100d734-d882-4aea-9813-0a9fd67bd92f:Sphere
+                        Materials:
+                            aea4a69984a202e23a04c822f1ef53c8~0: ef51ce78-b485-4233-bd3c-639716e7b407:Glass
+                    41c65e3fa57371acd303b07f9b05bc7d: !InstancingComponent
+                        Id: 8e3aaa9a-7412-4c51-8c98-6d9fe915e058
+                        Type: !InstancingEntityTransform {}
         -   Entity:
                 Id: f5cb84ee-3557-463c-803e-64165dc09b9a
                 Name: Ground
