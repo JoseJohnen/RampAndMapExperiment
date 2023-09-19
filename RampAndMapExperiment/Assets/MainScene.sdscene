@@ -13,14 +13,14 @@ Hierarchy:
         - ref!! 7fb866ef-a18e-41d6-aca4-b94f7d26e5bf
         - ref!! f6116aea-a899-41b5-a428-a8aab2baef21
         - ref!! 277051be-69bb-4c9c-b202-0d9328e895c5
-        - ref!! 53836a00-0c55-4cf8-ab14-a1e27d577012
-        - ref!! e25b913e-b367-48ec-942b-42d2c708224f
-        - ref!! 70809faf-7296-4833-a96c-2986bce02fa3
-        - ref!! e2b805ad-f1f3-49d4-8e0d-ef01ae153df5
         - ref!! a7aded27-127c-4049-848c-80249f1ec899
         - ref!! ecbf705b-32c7-4eff-879f-80e3d875a665
         - ref!! 7fc9887c-0140-47d4-9b74-84353eeea96b
         - ref!! af540db8-6bc4-4377-87c0-27443d3d168b
+        - ref!! 53836a00-0c55-4cf8-ab14-a1e27d577012
+        - ref!! e25b913e-b367-48ec-942b-42d2c708224f
+        - ref!! 70809faf-7296-4833-a96c-2986bce02fa3
+        - ref!! e2b805ad-f1f3-49d4-8e0d-ef01ae153df5
     Parts:
         -   Entity:
                 Id: 277051be-69bb-4c9c-b202-0d9328e895c5
@@ -73,7 +73,7 @@ Hierarchy:
                 Components:
                     ea1ac9f254eaa7914bcce95fba3d3399: !TransformComponent
                         Id: 9aedaa7a-38a4-452c-9791-2df4aed4367a
-                        Position: {X: 0.0, Y: 0.0, Z: 3.106014}
+                        Position: {X: -2.8767166, Y: 0.0, Z: 1.6577897}
                         Rotation: {X: 0.0, Y: 0.0, Z: 0.0, W: 1.0}
                         Scale: {X: 1.0, Y: 1.0, Z: 1.0}
                         Children: {}
@@ -108,7 +108,7 @@ Hierarchy:
                 Components:
                     ea1ac9f254eaa7914bcce95fba3d3399: !TransformComponent
                         Id: 90917c92-72cd-4964-948a-124ddcc113fd
-                        Position: {X: 0.0, Y: 3.0, Z: -2.7401416}
+                        Position: {X: 2.1746452, Y: 2.6119425, Z: -2.585544}
                         Rotation: {X: 0.0, Y: 0.0, Z: 0.0, W: 1.0}
                         Scale: {X: 1.0, Y: 1.0, Z: 1.0}
                         Children: {}
@@ -126,7 +126,7 @@ Hierarchy:
                 Components:
                     e98694f772f558968007bcb8135b8daf: !TransformComponent
                         Id: 9544595a-9268-49e4-895f-821b5ac0a982
-                        Position: {X: 0.0, Y: 0.5, Z: 0.0}
+                        Position: {X: 0.0, Y: 0.5, Z: 3.5072753}
                         Rotation: {X: 0.0, Y: 0.0, Z: 0.0, W: 1.0}
                         Scale: {X: 1.0, Y: 1.0, Z: 1.0}
                         Children: {}
@@ -177,13 +177,14 @@ Hierarchy:
                     257dd8f1bd9a2f8b29d98306be27a0b5: !TransformComponent
                         Id: d8291f71-0064-426b-9597-cbf8d120e61e
                         Position: {X: -0.3487941, Y: 1.3537586, Z: -0.29323164}
-                        Rotation: {X: 0.23871994, Y: 0.4072905, Z: -0.11118051, W: 0.8745091}
-                        Scale: {X: 1.0, Y: 1.0, Z: 1.0}
+                        Rotation: {X: 0.25362295, Y: 0.0, Z: 0.0, W: 0.96730316}
+                        Scale: {X: 0.5, Y: 0.5, Z: 0.5}
                         Children: {}
                     58986820caa85a18ed3645eadfa22cdf: !ModelComponent
                         Id: 5a4c2949-b4a3-4d20-b25f-0c9fb15bde64
                         Model: 7cf451aa-1be3-4b04-aaf4-681e174e9e17:Ground
-                        Materials: {}
+                        Materials:
+                            1d1b2413ea44341667cc1d829e82196b~0: ef51ce78-b485-4233-bd3c-639716e7b407:Glass
         -   Entity:
                 Id: b437980d-ec0f-400b-a9f1-f08ecf1527de
                 Name: Directional light
@@ -215,7 +216,7 @@ Hierarchy:
                 Components:
                     ea1ac9f254eaa7914bcce95fba3d3399: !TransformComponent
                         Id: 400fe4f5-e543-44a3-a102-229ab47cbbfb
-                        Position: {X: 3.9098434, Y: 0.0, Z: 0.0}
+                        Position: {X: 1.9770014, Y: 0.0, Z: 1.6555429}
                         Rotation: {X: 0.0, Y: 0.0, Z: 0.0, W: 1.0}
                         Scale: {X: 1.0, Y: 1.0, Z: 1.0}
                         Children: {}
@@ -233,7 +234,7 @@ Hierarchy:
                 Components:
                     ea1ac9f254eaa7914bcce95fba3d3399: !TransformComponent
                         Id: e0a23aa1-f700-4763-b87a-833341fe5e5f
-                        Position: {X: -3.3460176, Y: 3.0, Z: 0.0}
+                        Position: {X: -3.0754986, Y: 2.5320168, Z: -2.7056856}
                         Rotation: {X: 0.0, Y: 0.0, Z: 0.0, W: 1.0}
                         Scale: {X: 1.0, Y: 1.0, Z: 1.0}
                         Children: {}
