@@ -42,29 +42,58 @@ namespace RampAndMapExperiment
         {
             if (Input.IsKeyDown(Stride.Input.Keys.K))
             {
-                player.Transform.Position.Y = NuevaAltura(
-                    player.Transform.Position.Z, 
-                    new Vector2(point2.Transform.Position.Z, point2.Transform.Position.Y),
-                    new Vector2(point3.Transform.Position.Z, point3.Transform.Position.Y)
+                //player.Transform.Position.Y = NuevaAltura(
+                //    player.Transform.Position.Z, 
+                //    new Vector2(point2.Transform.Position.Z, point2.Transform.Position.Y),
+                //    new Vector2(point3.Transform.Position.Z, point3.Transform.Position.Y)
+                //    );
+                player.Transform.Position.Y = NuevaAltura3D(
+                    point5.Transform.Position,
+                    point6.Transform.Position,
+                    player.Transform.Position
                     );
                 DebugText.Print("NuevaAltura: "+player.Transform.Position.Y,new Int2(100,100));
             }
         }
 
-        //función lineal 3D (o Recta), Perfeccionaría la otra pues podríamos usar rampas diagonales y similar
-        public static float NuevaAltura3D(float positionOnTheRamp, Vector3 pointa, Vector3 pointb)
+        //Metodo obtenido y adaptado desde ClosestPointFromTheLineExperiment: FUNCIONA PERFECTO
+        public static float NuevaAltura3D(Vector3 pointa, Vector3 pointb, Vector3 characterPos)
         {
-            //Recta (Obtiene el punto desconocido)
-            //<x-x0,y-y0,z-z0> = t * <a,b,c>
-            //<x-x0,y-y0,z-z0> = <a*t,b*t,c*t>
-            //<x,y,z> = <x0+a*t,y0+b*t,z0+c*t>
+            // Calculate vectors AB and AC
+            double[] AB = { pointb.X - pointa.X, pointb.Y - pointa.Y, pointb.Z - pointa.Z };
+            double[] AC = { characterPos.X - pointa.X, characterPos.Y - pointa.Y, characterPos.Z - pointa.Z };
 
-            //Siendo: <x,y,z> un vector3
-            //        PoP = <x-x0,y-y0,z-z0> también es un Vector3
+            // Calculate the dot product of AB
+            double dotAB = DotProduct(AB, AB);
 
-            //Desde paralela
-            Vector3 recta = new Vector3(pointa.X + (pointb.X * positionOnTheRamp), pointa.Y + (pointb.Y * positionOnTheRamp), pointa.Z + (pointb.Z * positionOnTheRamp));
-            return recta.Y;
+            // Calculate the t-parameter for the projection
+            double t = DotProduct(AC, AB) / dotAB;
+
+            // Ensure that t is clamped between 0 and 1
+            t = Math.Clamp(t, 0, 1);
+
+            // Calculate the closest point D on the line
+            double[] D = { pointa.X + t * AB[0], pointa.Y + t * AB[1], pointa.Z + t * AB[2] };
+
+            //return new Tuple<double, double, double>(D[0], D[1], D[2]);
+            //return new Stride.Core.Mathematics.Vector3(
+            Vector3 result = new Stride.Core.Mathematics.Vector3(
+                Convert.ToSingle(D[0]),
+                Convert.ToSingle(D[1]),
+                Convert.ToSingle(D[2])
+                );
+            return result.Y;
+        }
+
+        //Metodo obtenido y adaptado desde ClosestPointFromTheLineExperiment: FUNCIONA PERFECTO
+        public static double DotProduct(double[] vector1, double[] vector2)
+        {
+            double result = 0;
+            for (int i = 0; i < vector1.Length; i++)
+            {
+                result += vector1[i] * vector2[i];
+            }
+            return result;
         }
 
         //Intentando con función lineal, probablemente lo que debí intentar desde el principio . . . ¡¡¡FUNCIONA PERFECTAMENTE!!!
