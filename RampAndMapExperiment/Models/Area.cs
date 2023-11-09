@@ -1,9 +1,11 @@
 ﻿using BaseExperimento.Auxiliary;
+using Silk.NET.SDL;
 using Stride.Core.Mathematics;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text.Json.Serialization;
+using static Stride.Animations.AnimationChannel;
 
 namespace RampAndMapExperiment.Models
 {
@@ -116,7 +118,69 @@ namespace RampAndMapExperiment.Models
             }
         }
 
+        //New version, Improved, it should work wherever direction the ramp is setted
         public static bool IsInside(Vector3 entityPosition, Area areaChecked)
+        {
+            Vector2 CornerNW;
+            Vector2 CornerNE;
+            Vector2 CornerSW;
+            Vector2 CornerSE;
+
+            Vector2 entityPos;
+
+            if (areaChecked.isFloor == FloorIs.FloorIsXZ)
+            {
+                CornerNW = new Vector2(areaChecked.dic_points["NW"].X, areaChecked.dic_points["NW"].Z);
+                CornerNE = new Vector2(areaChecked.dic_points["NE"].X, areaChecked.dic_points["NE"].Z);
+                CornerSW = new Vector2(areaChecked.dic_points["SW"].X, areaChecked.dic_points["SW"].Z);
+                CornerSE = new Vector2(areaChecked.dic_points["SE"].X, areaChecked.dic_points["SE"].Z);
+
+                entityPos = new Vector2(entityPosition.X, entityPosition.Z);
+            }
+            else if (areaChecked.isFloor == FloorIs.FloorIsXY)
+            {
+                CornerNW = new Vector2(areaChecked.dic_points["NW"].X, areaChecked.dic_points["NW"].Y);
+                CornerNE = new Vector2(areaChecked.dic_points["NE"].X, areaChecked.dic_points["NE"].Y);
+                CornerSW = new Vector2(areaChecked.dic_points["SW"].X, areaChecked.dic_points["SW"].Y);
+                CornerSE = new Vector2(areaChecked.dic_points["SE"].X, areaChecked.dic_points["SE"].Y);
+
+                entityPos = new Vector2(entityPosition.X, entityPosition.Y);
+            }
+            //If it enters here it should not be consider for detection
+            else
+            {
+                return false;
+            }
+
+            bool isInsideNWNEX = IsFloatInRange(CornerNW.X, CornerNE.X, entityPos.X);
+            bool isInsideNWNEY = IsFloatInRange(CornerNW.Y, CornerNE.Y, entityPos.Y);
+
+            bool isInsideSWSEX = IsFloatInRange(CornerSW.X, CornerSE.X, entityPos.X);
+            bool isInsideSWSEY = IsFloatInRange(CornerSW.Y, CornerSE.Y, entityPos.Y);
+
+            bool isInsideSWNWX = IsFloatInRange(CornerSW.X, CornerNW.X, entityPos.X);
+            bool isInsideSWNWY = IsFloatInRange(CornerSW.Y, CornerNW.Y, entityPos.Y);
+
+            bool isInsideSENEX = IsFloatInRange(CornerSE.X, CornerNE.X, entityPos.X);
+            bool isInsideSENEY = IsFloatInRange(CornerSE.Y, CornerNE.Y, entityPos.Y);
+
+            //if the X is sides and Y frontback and is inside
+            if (isInsideNWNEX && isInsideSWSEX && isInsideSWNWY && isInsideSENEY)
+            {
+                return true;
+            }
+
+            //if the Y is sides and X frontback and is inside
+            if (isInsideNWNEY && isInsideSWSEY && isInsideSWNWX && isInsideSENEX)
+            {
+                return true;
+            }
+
+            return false;
+        }
+
+        //Antigua version, en desuso, no funciona para casos flexibles
+        public static bool IsInsideAlt(Vector3 entityPosition, Area areaChecked)
         {
             Vector2 CornerNW;
             Vector2 CornerSE;
@@ -176,6 +240,34 @@ namespace RampAndMapExperiment.Models
             if (isWLocTrue && isELocTrue && isNLocTrue && isSLocTrue)
             {
                 return true;
+            }
+            return false;
+        }
+
+        /// <summary>
+        /// It evaluates between the first and second float and see if the evaluated float is 
+        /// between the first and second ones
+        /// </summary>
+        /// <param name="first">the first float to compare</param>
+        /// <param name="second">the second float to compare</param>
+        /// <param name="evaluated">the evaluated float</param>
+        /// <returns>true if the evaluated float is between the first and second, false if otherwise</returns>
+        public static bool IsFloatInRange(float first, float second, float evaluated)
+        {
+            if (first > second)
+            {
+                if (first > evaluated && second < evaluated)
+                {
+                    return true;
+                }
+            }
+            //if the opposite is true
+            else
+            {
+                if (first < evaluated && second > evaluated)
+                {
+                    return true;
+                }
             }
             return false;
         }

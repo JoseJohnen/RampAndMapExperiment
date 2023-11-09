@@ -43,56 +43,112 @@ namespace RampAndMapExperiment
         {
             if (Input.IsKeyDown(Stride.Input.Keys.K))
             {
-                //player.Transform.Position.Y = NuevaAltura(
-                //    player.Transform.Position.Z, 
-                //    new Vector2(point2.Transform.Position.Z, point2.Transform.Position.Y),
-                //    new Vector2(point3.Transform.Position.Z, point3.Transform.Position.Y)
-                //    );
-                //player.Transform.Position.Y = NuevaAltura3D(
-                //    point5.Transform.Position,
-                //    point6.Transform.Position,
-                //    player.Transform.Position
-                //    );
-                //DebugText.Print("NuevaAltura: " + player.Transform.Position.Y, new Int2(100, 100));
-                //UpperLeft Corner
-                //UpperRight Corner
-                //BottomRight Corner
-                //BottomLeft Corner
-                RampCalculation(point5.Transform.Position,point6.Transform.Position,ref player.Transform.Position,point4.Transform.Position,point3.Transform.Position,point2.Transform.Position,point1.Transform.Position);
+                //Todos estos métodos estan probados y funcionan
+                //player.Transform.Position.Y = NuevaAltura3D(point5.Transform.Position, point6.Transform.Position, player.Transform.Position);
+                //RampCalculation(point5.Transform.Position,point6.Transform.Position,ref player.Transform.Position,point4.Transform.Position,point3.Transform.Position,point2.Transform.Position,point1.Transform.Position);
+                //RampCalculation(ref player.Transform.Position,point4.Transform.Position,point3.Transform.Position,point2.Transform.Position,point1.Transform.Position);
+                RampCalculation(ref player.Transform.Position,new Area("AreaBase",point4.Transform.Position,point3.Transform.Position,point2.Transform.Position,point1.Transform.Position));
                 DebugText.Print("NuevaAltura: " + player.Transform.Position.Y, new Int2(100, 100));
             }
         }
 
-        public bool RampCalculation(Vector3 pointa, Vector3 pointb, ref Vector3 characterPos, Vector3 UpperLeftCorner, Vector3 UpperRightCorner, Vector3 BottomRightCorner, Vector3 BottomLeftCorner)
+        /// <summary>
+        /// Evalúa si el personaje esta dentro del área de la rampa además de sobre la misma para 
+        /// actualizar su altura de modo tal que quede situado sobre la rampa
+        /// </summary>
+        /// <param name="characterPos">Una referencia a la entidad que se desea evaluar y posicionar sobre la rampa</param>
+        /// <param name="UpperRightCorner">La posición de la esquina superior izquierda de la rampa</param>
+        /// <param name="BottomRightCorner">La posición de la esquina superior derecha de la rampa</param>
+        /// <param name="UpperLeftCorner">La posición de la esquina inferior derecha de la rampa</param>
+        /// <param name="BottomLeftCorner">La posición de la esquina inferior izquierda de la rampa</param>
+        /// <param name="sensibilidadDeAlturaInicial">(Opcional) Permite definir la sensibilidad para detectar si alguien esta o no sobre la rampa</param>
+        /// <returns>Verdadero si se modifico la altura de la entidad referenciada, falso de lo contrario</returns>
+        public bool RampCalculation(ref Vector3 characterPos, Vector3 UpperRightCorner, Vector3 BottomRightCorner, Vector3 UpperLeftCorner, Vector3 BottomLeftCorner, float sensibilidadDeAlturaInicial = 0.25f)
         {
-            Area areaRamp = new Area("AreaRampa", UpperLeftCorner, BottomLeftCorner, UpperRightCorner, BottomRightCorner);
-
-            Vector3 fakeCharacter = characterPos;
-            DebugText.Print("Distance: "
-                    + Area.DistanciaEntreVectores(
-                        characterPos,
-                        fakeCharacter
-                        )
-                    , new Int2(100, 120));
+            Area areaRamp = new Area("AreaRampa", UpperRightCorner, UpperLeftCorner, BottomRightCorner, BottomLeftCorner);
 
             //If its not inside the area of the ramp, it doesn't change the height of the character
-            DebugText.Print("Is In Area?: "
-                + Area.IsActionFromEntityTrue(characterPos, areaRamp)
-                , new Int2(100, 140));
+            //because it's not using the ramp, therefore it return false
             if (!Area.IsActionFromEntityTrue(characterPos, areaRamp))
             {
                 return false;
             }
 
+            //Pero si se encuentra en el área de la rampa, entonces evaluamos si esta sobre la misma
+
+            //Se preparan los puntos necesarios
+            Vector3 pointa = ObtenerPuntoMedio(BottomLeftCorner, UpperLeftCorner);
+            Vector3 pointb = ObtenerPuntoMedio(BottomRightCorner, UpperRightCorner);
+
+            //Nos aseguramos que el modificador del evaluador sea un número positivo
+            float sensAltInic = sensibilidadDeAlturaInicial;
+            if(sensibilidadDeAlturaInicial < 0)
+            {
+                sensAltInic = sensibilidadDeAlturaInicial * -1;
+            }
+
+            //Agregamos el modificador y preparamos el 'fakeCharacter' para
+            //evaluar si el player esta arriba o no de la rampa
+            Vector3 fakeCharacter = characterPos;
+            fakeCharacter.Y = fakeCharacter.Y - sensAltInic;
+
             //Evaluate if the character is over or under the ramp, if over it for one or less
-            //it will have the ramp height
-            fakeCharacter.Y = NuevaAltura3D(pointa, pointb, fakeCharacter);
+            //it will have the ramp height, otherwise it will not
+            fakeCharacter.Y = NuevaAltura3D(pointa, pointb, fakeCharacter) - sensAltInic;
             if (characterPos.Y >= fakeCharacter.Y)
             {
                 characterPos.Y = NuevaAltura3D(pointa, pointb, characterPos);
+                return true;
             }
 
-            return true;
+            return false;
+        }
+
+        /// <summary>
+        /// Evalúa si el personaje esta dentro del área de la rampa además de sobre la misma para 
+        /// actualizar su altura de modo tal que quede situado sobre la rampa
+        /// </summary>
+        /// <param name="characterPos">Una referencia a la entidad que se desea evaluar y posicionar sobre la rampa</param>
+        /// <param name="areaRamp">El área que cubre la rampa</param>
+        /// <param name="sensibilidadDeAlturaInicial">(Opcional) Permite definir la sensibilidad para detectar si alguien esta o no sobre la rampa</param>
+        /// <returns>Verdadero si se modifico la altura de la entidad referenciada, falso de lo contrario</returns>
+        public bool RampCalculation(ref Vector3 characterPos, Area areaRamp, float sensibilidadDeAlturaInicial = 0.25f)
+        {
+            //If its not inside the area of the ramp, it doesn't change the height of the character
+            //because it's not using the ramp, therefore it return false
+            if (!Area.IsActionFromEntityTrue(characterPos, areaRamp))
+            {
+                return false;
+            }
+
+            //Pero si se encuentra en el área de la rampa, entonces evaluamos si esta sobre la misma
+
+            //Se preparan los puntos necesarios
+            Vector3 pointa = ObtenerPuntoMedio(areaRamp.Dic_Points["SE"], areaRamp.Dic_Points["NE"]);
+            Vector3 pointb = ObtenerPuntoMedio(areaRamp.Dic_Points["SW"], areaRamp.Dic_Points["NW"]);
+
+            //Nos aseguramos que el modificador del evaluador sea un número positivo
+            float sensAltInic = sensibilidadDeAlturaInicial;
+            if (sensibilidadDeAlturaInicial < 0)
+            {
+                sensAltInic = sensibilidadDeAlturaInicial * -1;
+            }
+
+            //Agregamos el modificador y preparamos el 'fakeCharacter' para
+            //evaluar si el player esta arriba o no de la rampa
+            Vector3 fakeCharacter = characterPos;
+            fakeCharacter.Y = fakeCharacter.Y - sensAltInic;
+
+            //Evaluate if the character is over or under the ramp, if over it for one or less
+            //it will have the ramp height, otherwise it will not
+            fakeCharacter.Y = NuevaAltura3D(pointa, pointb, fakeCharacter) - sensAltInic;
+            if (characterPos.Y >= fakeCharacter.Y)
+            {
+                characterPos.Y = NuevaAltura3D(pointa, pointb, characterPos);
+                return true;
+            }
+
+            return false;
         }
 
         //Metodo obtenido y adaptado desde ClosestPointFromTheLineExperiment: FUNCIONA PERFECTO
@@ -167,6 +223,13 @@ namespace RampAndMapExperiment
         {
             Vector3 valueToReturn = new Vector3();
             Vector3.Lerp(ref puntoA.Transform.Position, ref puntoB.Transform.Position, 0.5f, out valueToReturn);
+            return valueToReturn;
+        }
+
+        public static Vector3 ObtenerPuntoMedio(Vector3 puntoA, Vector3 puntoB)
+        {
+            Vector3 valueToReturn = new Vector3();
+            Vector3.Lerp(ref puntoA, ref puntoB, 0.5f, out valueToReturn);
             return valueToReturn;
         }
     }
