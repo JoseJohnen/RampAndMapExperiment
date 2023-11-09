@@ -7,6 +7,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RampAndMapExperiment.Window
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RampAndMapExperiment", "RampAndMapExperiment\RampAndMapExperiment.csproj", "{B9A1A797-43C9-4746-92C1-74A1465D4749}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BaseExperimento", "..\..\..\..\Cod_Pers\Visual_Studio\BaseExperimento\BaseExperimento.csproj", "{57773EFF-0A6F-444E-9C65-AA2955481980}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{B9A1A797-43C9-4746-92C1-74A1465D4749}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B9A1A797-43C9-4746-92C1-74A1465D4749}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B9A1A797-43C9-4746-92C1-74A1465D4749}.Release|Any CPU.Build.0 = Release|Any CPU
+		{57773EFF-0A6F-444E-9C65-AA2955481980}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{57773EFF-0A6F-444E-9C65-AA2955481980}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{57773EFF-0A6F-444E-9C65-AA2955481980}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{57773EFF-0A6F-444E-9C65-AA2955481980}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

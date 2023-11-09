@@ -1,4 +1,5 @@
-﻿using Stride.Core.Mathematics;
+﻿using RampAndMapExperiment.Models;
+using Stride.Core.Mathematics;
 using Stride.Engine;
 using System;
 using System.Collections.Generic;
@@ -47,13 +48,51 @@ namespace RampAndMapExperiment
                 //    new Vector2(point2.Transform.Position.Z, point2.Transform.Position.Y),
                 //    new Vector2(point3.Transform.Position.Z, point3.Transform.Position.Y)
                 //    );
-                player.Transform.Position.Y = NuevaAltura3D(
-                    point5.Transform.Position,
-                    point6.Transform.Position,
-                    player.Transform.Position
-                    );
-                DebugText.Print("NuevaAltura: "+player.Transform.Position.Y,new Int2(100,100));
+                //player.Transform.Position.Y = NuevaAltura3D(
+                //    point5.Transform.Position,
+                //    point6.Transform.Position,
+                //    player.Transform.Position
+                //    );
+                //DebugText.Print("NuevaAltura: " + player.Transform.Position.Y, new Int2(100, 100));
+                //UpperLeft Corner
+                //UpperRight Corner
+                //BottomRight Corner
+                //BottomLeft Corner
+                RampCalculation(point5.Transform.Position,point6.Transform.Position,ref player.Transform.Position,point4.Transform.Position,point3.Transform.Position,point2.Transform.Position,point1.Transform.Position);
+                DebugText.Print("NuevaAltura: " + player.Transform.Position.Y, new Int2(100, 100));
             }
+        }
+
+        public bool RampCalculation(Vector3 pointa, Vector3 pointb, ref Vector3 characterPos, Vector3 UpperLeftCorner, Vector3 UpperRightCorner, Vector3 BottomRightCorner, Vector3 BottomLeftCorner)
+        {
+            Area areaRamp = new Area("AreaRampa", UpperLeftCorner, BottomLeftCorner, UpperRightCorner, BottomRightCorner);
+
+            Vector3 fakeCharacter = characterPos;
+            DebugText.Print("Distance: "
+                    + Area.DistanciaEntreVectores(
+                        characterPos,
+                        fakeCharacter
+                        )
+                    , new Int2(100, 120));
+
+            //If its not inside the area of the ramp, it doesn't change the height of the character
+            DebugText.Print("Is In Area?: "
+                + Area.IsActionFromEntityTrue(characterPos, areaRamp)
+                , new Int2(100, 140));
+            if (!Area.IsActionFromEntityTrue(characterPos, areaRamp))
+            {
+                return false;
+            }
+
+            //Evaluate if the character is over or under the ramp, if over it for one or less
+            //it will have the ramp height
+            fakeCharacter.Y = NuevaAltura3D(pointa, pointb, fakeCharacter);
+            if (characterPos.Y >= fakeCharacter.Y)
+            {
+                characterPos.Y = NuevaAltura3D(pointa, pointb, characterPos);
+            }
+
+            return true;
         }
 
         //Metodo obtenido y adaptado desde ClosestPointFromTheLineExperiment: FUNCIONA PERFECTO
@@ -97,7 +136,7 @@ namespace RampAndMapExperiment
         }
 
         //Intentando con función lineal, probablemente lo que debí intentar desde el principio . . . ¡¡¡FUNCIONA PERFECTAMENTE!!!
-        public static float NuevaAltura(float positionOnTheRamp,Vector2 pointa, Vector2 pointb)
+        public static float NuevaAltura(float positionOnTheRamp, Vector2 pointa, Vector2 pointb)
         {
             //Pendiente
             //m = y2 - y1
