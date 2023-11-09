@@ -65,7 +65,7 @@ namespace RampAndMapExperiment
 
         public bool RampCalculation(Vector3 pointa, Vector3 pointb, ref Vector3 characterPos, Vector3 UpperLeftCorner, Vector3 UpperRightCorner, Vector3 BottomRightCorner, Vector3 BottomLeftCorner)
         {
-            Area areaRamp = new Area("AreaRamp", UpperLeftCorner, BottomLeftCorner, UpperRightCorner, BottomRightCorner);
+            Area areaRamp = new Area("AreaRampa", UpperLeftCorner, BottomLeftCorner, UpperRightCorner, BottomRightCorner);
 
             Vector3 fakeCharacter = characterPos;
             DebugText.Print("Distance: "
