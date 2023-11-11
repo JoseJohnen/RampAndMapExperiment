@@ -16,12 +16,23 @@ Hierarchy:
         - ref!! a7aded27-127c-4049-848c-80249f1ec899
         - ref!! ecbf705b-32c7-4eff-879f-80e3d875a665
         - ref!! 7fc9887c-0140-47d4-9b74-84353eeea96b
-        - ref!! af540db8-6bc4-4377-87c0-27443d3d168b
-        - ref!! 53836a00-0c55-4cf8-ab14-a1e27d577012
-        - ref!! e25b913e-b367-48ec-942b-42d2c708224f
-        - ref!! 70809faf-7296-4833-a96c-2986bce02fa3
-        - ref!! e2b805ad-f1f3-49d4-8e0d-ef01ae153df5
+        - ref!! 0abf5d8a-7a8f-4a13-9a13-52ab6a122996
     Parts:
+        -   Entity:
+                Id: 0abf5d8a-7a8f-4a13-9a13-52ab6a122996
+                Name: Entity
+                Components:
+                    7f515a4fb164f00b174847fd47517f99: !TransformComponent
+                        Id: 3132fae7-a266-47c1-80de-842c1e1b80c3
+                        Position: {X: 0.0, Y: 0.0, Z: 0.0}
+                        Rotation: {X: 0.0, Y: 0.0, Z: 0.0, W: 1.0}
+                        Scale: {X: 1.0, Y: 1.0, Z: 1.0}
+                        Children:
+                            436053d4660ba43aa42900b979ceecfa: ref!! d8291f71-0064-426b-9597-cbf8d120e61e
+                            e1f48241e47693274a015ae0667782f7: ref!! 9aedaa7a-38a4-452c-9791-2df4aed4367a
+                            9aaabe229d09e4cdac4f41638141e427: ref!! 400fe4f5-e543-44a3-a102-229ab47cbbfb
+                            02cf5e02f56491197b2a5fc9e38244b8: ref!! 90917c92-72cd-4964-948a-124ddcc113fd
+                            ba8aba6793d5e241367b9106e82cfe08: ref!! e0a23aa1-f700-4763-b87a-833341fe5e5f
         -   Entity:
                 Id: 277051be-69bb-4c9c-b202-0d9328e895c5
                 Name: RampProcessor
